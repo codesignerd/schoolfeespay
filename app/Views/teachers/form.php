@@ -1,0 +1,14 @@
+<?php $isEdit = !empty($teacher['id']); ?>
+<div class="page-heading"><div><p class="eyebrow">Staff</p><h1><?= $isEdit ? 'Edit Teacher' : 'Create Teacher' ?></h1></div><a class="btn btn-outline-secondary" href="<?= e(url('/teachers')) ?>">Back</a></div>
+<section class="panel"><form class="row g-3" method="post" action="<?= e($isEdit ? url('/teachers/update') : url('/teachers')) ?>"><?= csrf_field() ?><?php if ($isEdit): ?><input type="hidden" name="id" value="<?= e($teacher['id']) ?>"><?php endif; ?>
+<div class="col-md-3"><label class="form-label">Staff No</label><input class="form-control" name="staff_no" value="<?= e($teacher['staff_no'] ?? '') ?>"></div>
+<div class="col-md-3"><label class="form-label">First Name</label><input class="form-control" name="first_name" value="<?= e($teacher['first_name'] ?? '') ?>"></div>
+<div class="col-md-3"><label class="form-label">Last Name</label><input class="form-control" name="last_name" value="<?= e($teacher['last_name'] ?? '') ?>"></div>
+<div class="col-md-3"><label class="form-label">Gender</label><select class="form-select" name="gender"><?php foreach (['male','female','other'] as $value): ?><option value="<?= e($value) ?>" <?= ($teacher['gender'] ?? '') === $value ? 'selected' : '' ?>><?= e(ucfirst($value)) ?></option><?php endforeach; ?></select></div>
+<div class="col-md-4"><label class="form-label">Email</label><input class="form-control" type="email" name="email" value="<?= e($teacher['email'] ?? '') ?>"></div>
+<div class="col-md-4"><label class="form-label">Phone</label><input class="form-control" name="phone" value="<?= e($teacher['phone'] ?? '') ?>"></div>
+<div class="col-md-4"><label class="form-label">Department</label><select class="form-select" name="department_id"><option value="">Unassigned</option><?php foreach ($departments as $department): ?><option value="<?= e($department['id']) ?>" <?= (string)($teacher['department_id'] ?? '') === (string)$department['id'] ? 'selected' : '' ?>><?= e($department['name']) ?></option><?php endforeach; ?></select></div>
+<div class="col-md-4"><label class="form-label">Qualification</label><input class="form-control" name="qualification" value="<?= e($teacher['qualification'] ?? '') ?>"></div>
+<div class="col-md-4"><label class="form-label">Hire Date</label><input class="form-control" type="date" name="hire_date" value="<?= e($teacher['hire_date'] ?? '') ?>"></div>
+<div class="col-md-4"><label class="form-label">Status</label><select class="form-select" name="status"><?php foreach (['active','leave','inactive'] as $value): ?><option value="<?= e($value) ?>" <?= ($teacher['status'] ?? 'active') === $value ? 'selected' : '' ?>><?= e(ucfirst($value)) ?></option><?php endforeach; ?></select></div>
+<div class="col-12 d-flex justify-content-end gap-2"><a class="btn btn-outline-secondary" href="<?= e(url('/teachers')) ?>">Cancel</a><button class="btn btn-primary">Save Teacher</button></div></form></section>

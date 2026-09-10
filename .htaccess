@@ -1,0 +1,22 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /schoolfeespay/
+
+    # Security: Deny direct web browsing access to sensitive backend directories and files
+    RewriteRule ^(app|config|database|scratch)/ - [F,L]
+    RewriteRule \.(sql|json|lock|env|log)$ - [F,L]
+
+    # Redirect any URL containing /public/ (e.g. /schoolfeespay/public/login) to clean URL (/schoolfeespay/login)
+    RewriteRule ^public/(.*)$ /schoolfeespay/$1 [R=301,L]
+
+    # Serve static assets (CSS, JS, images) from public/ if they exist physically
+    RewriteCond %{DOCUMENT_ROOT}/schoolfeespay/public/$1 -f [OR]
+    RewriteCond %{DOCUMENT_ROOT}/schoolfeespay/public/$1 -d
+    RewriteRule ^(.*)$ public/$1 [L]
+
+    # Route all other clean application requests to public/index.php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ public/index.php [QSA,L]
+</IfModule>
+

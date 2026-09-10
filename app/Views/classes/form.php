@@ -1,0 +1,9 @@
+<?php $isEdit = !empty($class['id']); ?>
+<div class="page-heading"><div><p class="eyebrow">Academic Structure</p><h1><?= $isEdit ? 'Edit Class' : 'Create Class' ?></h1></div><a class="btn btn-outline-secondary" href="<?= e(url('/classes')) ?>">Back</a></div>
+<section class="panel"><form class="row g-3" method="post" action="<?= e($isEdit ? url('/classes/update') : url('/classes')) ?>"><?= csrf_field() ?><?php if ($isEdit): ?><input type="hidden" name="id" value="<?= e($class['id']) ?>"><?php endif; ?>
+<div class="col-md-3"><label class="form-label">Grade</label><input class="form-control" name="name" value="<?= e($class['name'] ?? '') ?>" placeholder="Grade 7"></div>
+<div class="col-md-3"><label class="form-label">Stream</label><input class="form-control" name="stream" value="<?= e($class['stream'] ?? '') ?>" placeholder="North"></div>
+<div class="col-md-3"><label class="form-label">Class Teacher</label><select class="form-select" name="class_teacher_id"><option value="">Unassigned</option><?php foreach ($teachers as $teacher): ?><option value="<?= e($teacher['id']) ?>" <?= (string)($class['class_teacher_id'] ?? '') === (string)$teacher['id'] ? 'selected' : '' ?>><?= e($teacher['name']) ?></option><?php endforeach; ?></select></div>
+<div class="col-md-2"><label class="form-label">Capacity</label><input class="form-control" type="number" name="capacity" value="<?= e($class['capacity'] ?? 45) ?>"></div>
+<div class="col-md-1"><label class="form-label">Status</label><select class="form-select" name="status"><option value="active" <?= ($class['status'] ?? 'active') === 'active' ? 'selected' : '' ?>>Active</option><option value="inactive" <?= ($class['status'] ?? '') === 'inactive' ? 'selected' : '' ?>>Inactive</option></select></div>
+<div class="col-12 d-flex justify-content-end gap-2"><a class="btn btn-outline-secondary" href="<?= e(url('/classes')) ?>">Cancel</a><button class="btn btn-primary">Save Class</button></div></form></section>
