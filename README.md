@@ -25,7 +25,7 @@ Update the database configuration file with the correct local credentials.
 return [
     'host' => '127.0.0.1',
     'port' => '3306',
-    'database' => 'schoolhub',
+    'database' => 'schoolfeespay',
     'username' => 'root',
     'password' => 'secret',
     'charset' => 'utf8mb4'

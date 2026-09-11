@@ -18,9 +18,11 @@
                 <div class="panel-header"><div><h2>Student Summary</h2><p>Your academic identity.</p></div><i class="bi bi-person-vcard text-primary fs-4"></i></div>
                 <ul class="summary-list mb-3">
                     <li><span>Name</span><strong><?= e(trim($student['first_name'] . ' ' . ($student['other_name'] ? $student['other_name'] . ' ' : '') . $student['last_name'])) ?></strong></li>
+                    <li><span>Admission No</span><strong><?= e($student['admission_no'] ?? '—') ?></strong></li>
                     <li><span>Matriculation</span><strong><?= e($student['matriculation_no'] ?? 'Pending') ?></strong></li>
                     <li><span>Programme</span><strong><?= e($student['programme'] ?? '—') ?></strong></li>
                     <li><span>Level</span><strong><?= e($student['level'] ?? '—') ?></strong></li>
+                    <li><span>Session</span><strong><?= e($student['academic_session'] ?? '—') ?></strong></li>
                 </ul>
                 <a class="btn btn-outline-secondary btn-sm" href="<?= e(url('/profile')) ?>">View profile</a>
             </section>
