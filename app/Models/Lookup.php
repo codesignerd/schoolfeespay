@@ -39,7 +39,7 @@ final class Lookup
 
     public static function departments(): array
     {
-        return Database::connection()->query('SELECT id, name FROM departments ORDER BY name')->fetchAll();
+        return Database::connection()->query('SELECT id, name, code FROM departments ORDER BY name')->fetchAll();
     }
 
     public static function terms(): array

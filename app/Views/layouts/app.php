@@ -49,10 +49,12 @@
             <button class="btn btn-icon d-lg-none" type="button" data-toggle-sidebar aria-label="Open menu">
                 <i class="bi bi-list"></i>
             </button>
+            <?php if ((current_user()['role_slug'] ?? '') !== 'student'): ?>
             <form class="search-box d-none d-md-flex" action="<?= e(url('/users')) ?>" method="get">
                 <i class="bi bi-search"></i>
                 <input type="search" name="search" placeholder="Search users, students, reports">
             </form>
+            <?php endif; ?>
             <div class="ms-auto d-flex align-items-center gap-2">
                 <button class="btn btn-icon" type="button" data-theme-toggle aria-label="Toggle theme">
                     <i class="bi bi-moon-stars"></i>
